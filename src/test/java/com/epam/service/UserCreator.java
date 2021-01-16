@@ -1,6 +1,6 @@
-package com.epam.ta.service;
+package com.epam.service;
 
-import com.epam.ta.model.User;
+import com.epam.model.User;
 
 public class UserCreator {
 

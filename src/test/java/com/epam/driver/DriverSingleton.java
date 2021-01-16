@@ -1,4 +1,4 @@
-package com.epam.ta.driver;
+package com.epam.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -18,10 +18,12 @@ public class DriverSingleton {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
+                    break;
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
+                    break;
                 }
             }
             driver.manage().window().maximize();
