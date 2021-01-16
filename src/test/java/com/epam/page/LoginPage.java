@@ -20,8 +20,8 @@ public class LoginPage extends AbstractPage{
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        logger.info("Login page created");
         CustomWaits.waitForPageLoaded(driver);
+        logger.info("Login page created");
     }
 
     @Override

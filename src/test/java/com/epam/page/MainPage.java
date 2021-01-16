@@ -12,16 +12,25 @@ public class MainPage extends AbstractPage{
     private static final String MAIN_URL = "https://market.yandex.by/";
 
     @FindBy(xpath = "//div[@class='_3RDrvB5y7W _1Vd4y0E_v8']")
-    private WebElement profileButton;
+    protected WebElement profileButton;
+
+    @FindBy(xpath = "//input[@id='header-search']")
+    protected WebElement searchLineInput;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    protected WebElement searchButton;
+
+    @FindBy(xpath = "//button[@class='MOYcCv2eIJ _3UND8GjCtL']")
+    protected WebElement changeCityButton;
 
     public MainPage(WebDriver driver) {
         super(driver);
-        logger.info("Main page created");
         CustomWaits.waitForPageLoaded(driver);
+        logger.info("Main page created");
     }
 
     @Override
-    public AbstractPage openPage() {
+    public MainPage openPage() {
         driver.navigate().to(MAIN_URL);
         CustomWaits.waitForPageLoaded(driver);
         return this;
@@ -33,5 +42,32 @@ public class MainPage extends AbstractPage{
         WebElement loggedUser = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='_10BSdt90pf _3rYu_TSC-x']")));
         return loggedUser.getText();
+    }
+
+    public MainPage setupCity(String city){
+        changeCityButton.click();
+        CustomWaits.waitForPageLoaded(driver);
+        WebElement cityInput = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class='_1pVZ3jklLF']")));
+        cityInput.sendKeys(city);
+        WebElement hintCity = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='aSUR-uUgeo']")));
+        hintCity.click();
+        WebElement submitCity = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='zsSJkfeAPw _16jABpOZ2- _36y1jOUHs5 LS3-2-cZ2Z']")));
+        submitCity.click();
+        CustomWaits.waitForPageLoaded(driver);
+        logger.info("City set upped");
+        CustomWaits.waitForElementClickable(driver, searchLineInput);
+        return new MainPage(driver);
+    }
+
+    public CategoryPage search(String category){
+        CustomWaits.waitForPageLoaded(driver);
+        searchLineInput.sendKeys(category);
+        searchButton.click();
+        CustomWaits.waitForPageLoaded(driver);
+        logger.info("Search done");
+        return new CategoryPage(driver);
     }
 }

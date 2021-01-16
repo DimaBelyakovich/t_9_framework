@@ -21,8 +21,4 @@ public class CustomWaits {
                                 ExpectedConditions.elementToBeClickable(element))));
     }
 
-    public static void waitForElementLocated(WebDriver driver, String xpath){
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
-    }
 }

@@ -1,5 +1,6 @@
 package com.epam.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ResourceBundle;
 
 public class TestDataReader {
@@ -7,5 +8,10 @@ public class TestDataReader {
 
     public static String getTestData(String key){
         return resourceBundle.getString(key);
+    }
+
+    public static String getTestDataRus(String key) throws UnsupportedEncodingException {
+        return new String(TestDataReader.getTestData(key)
+                .getBytes("ISO-8859-1"), "UTF-8");
     }
 }
