@@ -16,6 +16,9 @@ public class CategoryPage extends MainPage {
     @FindBy(xpath = "//h3[@class='_3dCGE8Y9v3 cLo1fZHm2y']")
     private List<WebElement> itemTitle;
 
+    @FindBy(xpath = "//div[@class='_3NaXxl-HYN _3f2ZtYT7NH _1f_YBwo4nE']/span/span[2]")
+    private List<WebElement> itemCurrency;
+
     public CategoryPage(WebDriver driver) {
         super(driver);
         CustomWaits.waitForPageLoaded(driver);
@@ -33,7 +36,14 @@ public class CategoryPage extends MainPage {
     }
 
     public List<String> getSearchResultTitles(){
+        CustomWaits.waitForPageLoaded(driver);
         return itemTitle.stream().map(item -> item.getText())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getCurrency(){
+        CustomWaits.waitForPageLoaded(driver);
+        return itemCurrency.stream().map(i -> i.getText())
                 .collect(Collectors.toList());
     }
 }

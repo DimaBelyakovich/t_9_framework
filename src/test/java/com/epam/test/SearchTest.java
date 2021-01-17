@@ -28,6 +28,7 @@ public class SearchTest extends CommonConditions{
         CategoryPage categoryPage = new MainPage(driver)
                                     .openPage()
                                     .setupCity(city)
+                                    .closePopUp()
                                     .search(searchedCategory);
 
         String pageTitle = categoryPage.getCategoryTitle();
@@ -36,6 +37,6 @@ public class SearchTest extends CommonConditions{
         List<String> itemTitles = categoryPage.getSearchResultTitles();
         Assert.assertTrue(FindContains.findContains(itemTitles, expectedItemTitle));
 
-        
+
     }
 }
