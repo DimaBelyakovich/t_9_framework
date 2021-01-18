@@ -28,7 +28,7 @@ public class WishItemsTest extends CommonConditions{
         String city = TestDataReader.getTestDataRus(LOCATION_PROPERTY);
         String type = TestDataReader.getTestDataRus(CATEGORY_TYPE);
         String name = TestDataReader.getTestDataRus(CATEGORY_NAME);
-        List<Item> addedItems = new ArrayList<>();
+        LinkedList<Item> addedItems = new LinkedList<>();
 
         CategoryPage categoryPage = new MainPage(driver)
                                     .openPage()
@@ -36,12 +36,12 @@ public class WishItemsTest extends CommonConditions{
                                     .closePopUp()
                                     .goToCategory(type, name)
                                     .createItemList();
-        addedItems.add(categoryPage.addToWishList(1));
+        addedItems.addFirst(categoryPage.addToWishList(1));
         assertThat(categoryPage.getNumLikedSpan(), is(equalTo(addedItems.size())));
 
         ItemPage itemPage = categoryPage.goToItem(2)
                                         .creatItem();
-        addedItems.add(itemPage.addToWishList());
+        addedItems.addFirst(itemPage.addToWishList());
         assertThat(itemPage.getNumLikedSpan(), is(equalTo(addedItems.size())));
 
         WishListPage wishListPage = itemPage
@@ -49,7 +49,7 @@ public class WishItemsTest extends CommonConditions{
                                     .goToWishListPage()
                                     .createItemsList();
         assertThat(wishListPage.getNumLikedSpan(), is(equalTo(addedItems.size())));
-        Collections.reverse(addedItems);
+        assertThat(wishListPage.getPageTitle(), is(equalTo("Избранное")));
         assertThat(wishListPage.getItems(), is(equalTo(addedItems)));
     }
 }

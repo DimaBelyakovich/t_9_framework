@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -44,6 +45,7 @@ public class ComparisonTest extends CommonConditions{
         ComparisonPage comparisonPage = itemPage
                                         .goToComparisonPageFromPopUp()
                                         .createItemsList();
+        assertThat(comparisonPage.getPageTitle(), is(equalTo("Сравнение товаров")));
         assertThat(comparisonPage.getItems(), is(equalTo(addedItems)));
     }
 }

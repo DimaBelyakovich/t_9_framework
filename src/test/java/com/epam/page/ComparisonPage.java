@@ -14,6 +14,9 @@ public class ComparisonPage extends MainPage{
     @FindBy(xpath = "//a[@class='_27nuSZ19h7 PzFNvA3yUm cia-cs']")
     private List<WebElement> itemsTitle;
 
+    @FindBy(xpath = "//div[@class='_2itQJaiEj2']")
+    private WebElement pageTitle;
+
     private List<Item> itemsOnPage;
 
     public ComparisonPage(WebDriver driver) {
@@ -21,6 +24,10 @@ public class ComparisonPage extends MainPage{
         this.itemsOnPage = new ArrayList<>();
         CustomWaits.waitForPageLoaded(driver);
         logger.info("Comparison page created");
+    }
+
+    public String getPageTitle(){
+        return pageTitle.getText();
     }
 
     public ComparisonPage createItemsList(){

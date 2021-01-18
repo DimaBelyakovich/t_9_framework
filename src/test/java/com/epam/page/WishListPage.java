@@ -14,6 +14,9 @@ public class WishListPage extends MainPage{
     @FindBy(xpath = "//h3[@class='_3dCGE8Y9v3 cLo1fZHm2y']")
     private List<WebElement> itemsTitle;
 
+    @FindBy(xpath = "//h1[@class='_1hhP4ZCq0d']")
+    private WebElement pageTitle;
+
     private List<Item> itemsOnPage;
 
     public WishListPage(WebDriver driver) {
@@ -21,6 +24,10 @@ public class WishListPage extends MainPage{
         this.itemsOnPage = new ArrayList<>();
         CustomWaits.waitForPageLoaded(driver);
         logger.info("WishList page created");
+    }
+
+    public String getPageTitle(){
+        return pageTitle.getText();
     }
 
     public WishListPage createItemsList(){
