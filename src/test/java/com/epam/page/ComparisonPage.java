@@ -9,24 +9,24 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WishListPage extends MainPage{
+public class ComparisonPage extends MainPage{
 
-    @FindBy(xpath = "//h3[@class='_3dCGE8Y9v3 cLo1fZHm2y']")
+    @FindBy(xpath = "//a[@class='_27nuSZ19h7 PzFNvA3yUm cia-cs']")
     private List<WebElement> itemsTitle;
 
     private List<Item> itemsOnPage;
 
-    public WishListPage(WebDriver driver) {
+    public ComparisonPage(WebDriver driver) {
         super(driver);
         this.itemsOnPage = new ArrayList<>();
         CustomWaits.waitForPageLoaded(driver);
-        logger.info("WishList page created");
+        logger.info("Comparison page created");
     }
 
-    public WishListPage createItemsList(){
+    public ComparisonPage createItemsList(){
         for (int i = 0; i < itemsTitle.size(); i++) {
             Item item = new Item(itemsTitle.get(i).getText());
-            item.setFavourite(true);
+            item.setCompared(true);
             this.itemsOnPage.add(item);
         }
         return this;

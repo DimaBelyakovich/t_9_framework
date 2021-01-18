@@ -24,7 +24,7 @@ public class WishItemsTest extends CommonConditions{
     private static final String CATEGORY_NAME = "testdata.category.name";
 
     @Test
-    public void wishItemsTestWithoutAuthorization() throws UnsupportedEncodingException {
+    public void wishItemsWithoutAuthorizationTest() throws UnsupportedEncodingException {
         String city = TestDataReader.getTestDataRus(LOCATION_PROPERTY);
         String type = TestDataReader.getTestDataRus(CATEGORY_TYPE);
         String name = TestDataReader.getTestDataRus(CATEGORY_NAME);
@@ -36,7 +36,7 @@ public class WishItemsTest extends CommonConditions{
                                     .closePopUp()
                                     .goToCategory(type, name)
                                     .createItemList();
-        addedItems.add(categoryPage.addToFavourites(1));
+        addedItems.add(categoryPage.addToWishList(1));
         assertThat(categoryPage.getNumLikedSpan(), is(equalTo(addedItems.size())));
 
         ItemPage itemPage = categoryPage.goToItem(2)

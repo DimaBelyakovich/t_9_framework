@@ -11,8 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ItemPage extends MainPage{
 
+    private By popUpButton = By.xpath("//div[@class='_3oDLePObQ1']");
+
     @FindBy(xpath = "//div[@class='_2UmyXf5e76']")
-    private WebElement addToFavouritesButton;
+    private WebElement addToWishListButton;
+
+    @FindBy(xpath = "//div[@class='_1CXljk9rtd']")
+    private WebElement addToComparisonButton;
 
     @FindBy(xpath = "//h1[@class='_1BWd__A9LM _2OAACZwAjs undefined']")
     private WebElement itemTitle;
@@ -28,10 +33,19 @@ public class ItemPage extends MainPage{
 
     public Item addToWishList(){
         CustomWaits.waitForPageLoaded(driver);
-        addToFavouritesButton.click();
+        addToWishListButton.click();
         this.item.setFavourite(true);
-        CustomWaits.waitForElementLocated(driver, "//div[@class='_3oDLePObQ1']");
+        CustomWaits.waitForElementLocated(driver, popUpButton);
         logger.info("Added to favourites" + this.item);
+        return this.item;
+    }
+
+    public Item addToComparison(){
+        CustomWaits.waitForPageLoaded(driver);
+        addToComparisonButton.click();
+        this.item.setCompared(true);
+        CustomWaits.waitForElementLocated(driver, popUpButton);
+        logger.info("Added to comparison" + this.item);
         return this.item;
     }
 
@@ -48,5 +62,13 @@ public class ItemPage extends MainPage{
         closePopUpButton.click();
         CustomWaits.waitForPageLoaded(driver);
         return this;
+    }
+
+    public ComparisonPage goToComparisonPageFromPopUp(){
+        WebElement goToComparison = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.elementToBeClickable(popUpButton));
+        goToComparison.click();
+        CustomWaits.waitForPageLoaded(driver);
+        return new ComparisonPage(driver);
     }
 }

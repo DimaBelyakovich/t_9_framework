@@ -26,6 +26,11 @@ public class CustomWaits {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
     }
 
+    public static void waitForElementLocated(WebDriver driver, By locator){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
 
 
 }

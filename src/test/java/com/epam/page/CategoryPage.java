@@ -24,6 +24,9 @@ public class CategoryPage extends MainPage {
     @FindBy(xpath = "//div[@class='_2UmyXf5e76']")
     private List<WebElement> itemsLikeButton;
 
+    @FindBy(xpath = "//div[@class='_1CXljk9rtd']")
+    private List<WebElement> itemsCompareButton;
+
     private List<Item> itemsOnPage;
 
     public CategoryPage(WebDriver driver) {
@@ -62,13 +65,24 @@ public class CategoryPage extends MainPage {
         return this;
     }
 
-    public Item addToFavourites(int num){
+    public Item addToWishList(int num){
         CustomWaits.waitForPageLoaded(driver);
         itemsLikeButton.get(num).click();
         CustomWaits.waitForPageLoaded(driver);
         Item item = itemsOnPage.get(num);
         item.setFavourite(true);
         logger.info("Added to favourites" + item);
+        CustomWaits.waitForElementLocated(driver, "//div[@class='_3oDLePObQ1']");
+        return itemsOnPage.get(num);
+    }
+
+    public Item addToComparison(int num){
+        CustomWaits.waitForPageLoaded(driver);
+        itemsCompareButton.get(num).click();
+        CustomWaits.waitForPageLoaded(driver);
+        Item item = itemsOnPage.get(num);
+        item.setCompared(true);
+        logger.info("Added to comparison" + item);
         CustomWaits.waitForElementLocated(driver, "//div[@class='_3oDLePObQ1']");
         return itemsOnPage.get(num);
     }

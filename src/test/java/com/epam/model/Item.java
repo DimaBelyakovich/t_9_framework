@@ -13,11 +13,6 @@ public class Item {
         this.isCompared = false;
     }
 
-    public Item(String title, boolean isFavourite) {
-        this.title = title;
-        this.isFavourite = isFavourite;
-    }
-
     public Item(String title) {
         this.title = title;
         this.isFavourite = false;
