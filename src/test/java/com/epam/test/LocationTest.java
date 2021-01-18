@@ -1,6 +1,5 @@
 package com.epam.test;
 
-import com.epam.page.CategoryPage;
 import com.epam.page.MainPage;
 import com.epam.service.FindContains;
 import com.epam.service.TestDataReader;

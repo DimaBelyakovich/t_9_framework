@@ -27,6 +27,12 @@ public class MainPage extends AbstractPage{
     @FindBy(xpath = "//button[@class='zsSJkfeAPw _16jABpOZ2- gjdzW5ajbI _3WgR56k47x']")
     protected WebElement catalogButton;
 
+    @FindBy(xpath = "//*[name()='svg' and @title='Избранное']/parent::div/parent::div/span")
+    protected WebElement numLikedSpan;
+
+    @FindBy(xpath = "//*[name()='svg' and @title='Избранное']/parent::div/parent::div")
+    protected WebElement wishListButton;
+
     public MainPage(WebDriver driver) {
         super(driver);
         CustomWaits.waitForPageLoaded(driver);
@@ -96,5 +102,15 @@ public class MainPage extends AbstractPage{
         categoryButton.click();
         logger.info("Category opened");
         return new CategoryPage(driver);
+    }
+
+    public WishListPage goToWishListPage(){
+        wishListButton.click();
+        CustomWaits.waitForPageLoaded(driver);
+        return new WishListPage(driver);
+    }
+
+    public int getNumLikedSpan(){
+        return Integer.parseInt(numLikedSpan.getText());
     }
 }

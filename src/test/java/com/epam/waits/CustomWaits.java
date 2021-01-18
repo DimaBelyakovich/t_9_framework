@@ -26,4 +26,6 @@ public class CustomWaits {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
     }
 
+
+
 }
