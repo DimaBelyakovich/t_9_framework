@@ -27,24 +27,21 @@ public class ComparisonTest extends CommonConditions{
         String city = TestDataReader.getTestDataRus(LOCATION_PROPERTY);
         String type = TestDataReader.getTestDataRus(CATEGORY_TYPE1);
         String name = TestDataReader.getTestDataRus(CATEGORY_NAME1);
-        List<Item> addedItems = new ArrayList<>();
+        LinkedList<Item> addedItems = new LinkedList<>();
 
-        CategoryPage categoryPage = new MainPage(driver)
-                .openPage()
-                .setupCity(city)
-                .closePopUp()
-                .goToCategory(type, name)
-                .createItemList();
+        ComparisonPage comparisonPage = new MainPage(driver)
+                                    .openPage()
+                                    .setupCity(city)
+                                    .closePopUp()
+                                    .goToCategory(type, name)
+                                    .createItemList()
+                                    .addToComparison(1, addedItems)
+                                    .goToItem(2)
+                                    .creatItem()
+                                    .addToComparison(addedItems)
+                                    .goToComparisonPageFromPopUp()
+                                    .createItemsList();
 
-        addedItems.add(categoryPage.addToComparison(1));
-
-        ItemPage itemPage = categoryPage.goToItem(2)
-                                        .creatItem();
-        addedItems.add(itemPage.addToComparison());
-
-        ComparisonPage comparisonPage = itemPage
-                                        .goToComparisonPageFromPopUp()
-                                        .createItemsList();
         assertThat(comparisonPage.getPageTitle(), is(equalTo("Сравнение товаров")));
         assertThat(comparisonPage.getItems(), is(equalTo(addedItems)));
     }

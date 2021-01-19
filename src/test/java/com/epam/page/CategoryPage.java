@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,26 +66,28 @@ public class CategoryPage extends MainPage {
         return this;
     }
 
-    public Item addToWishList(int num){
+    public CategoryPage addToWishList(int num, LinkedList<Item> addedItems){
         CustomWaits.waitForPageLoaded(driver);
         itemsLikeButton.get(num).click();
         CustomWaits.waitForPageLoaded(driver);
         Item item = itemsOnPage.get(num);
         item.setFavourite(true);
+        addedItems.addFirst(item);
         logger.info("Added to favourites" + item);
         CustomWaits.waitForElementLocated(driver, "//div[@class='_3oDLePObQ1']");
-        return itemsOnPage.get(num);
+        return this;
     }
 
-    public Item addToComparison(int num){
+    public CategoryPage addToComparison(int num, LinkedList<Item> addedItems){
         CustomWaits.waitForPageLoaded(driver);
         itemsCompareButton.get(num).click();
         CustomWaits.waitForPageLoaded(driver);
         Item item = itemsOnPage.get(num);
         item.setCompared(true);
+        addedItems.addFirst(item);
         logger.info("Added to comparison" + item);
         CustomWaits.waitForElementLocated(driver, "//div[@class='_3oDLePObQ1']");
-        return itemsOnPage.get(num);
+        return this;
     }
 
     public ItemPage goToItem(int num){

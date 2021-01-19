@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ItemPage extends MainPage{
 
     private By popUpButton = By.xpath("//div[@class='_3oDLePObQ1']");
@@ -31,22 +34,24 @@ public class ItemPage extends MainPage{
         logger.info("Item page created");
     }
 
-    public Item addToWishList(){
+    public ItemPage addToWishList(LinkedList<Item> addedItems){
         CustomWaits.waitForPageLoaded(driver);
         addToWishListButton.click();
         this.item.setFavourite(true);
+        addedItems.addFirst(this.item);
         CustomWaits.waitForElementLocated(driver, popUpButton);
         logger.info("Added to favourites" + this.item);
-        return this.item;
+        return this;
     }
 
-    public Item addToComparison(){
+    public ItemPage addToComparison(LinkedList<Item> addedItems){
         CustomWaits.waitForPageLoaded(driver);
         addToComparisonButton.click();
         this.item.setCompared(true);
+        addedItems.addFirst(this.item);
         CustomWaits.waitForElementLocated(driver, popUpButton);
         logger.info("Added to comparison" + this.item);
-        return this.item;
+        return this;
     }
 
     public ItemPage creatItem(){

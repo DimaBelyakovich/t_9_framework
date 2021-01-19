@@ -35,13 +35,13 @@ public class WishItemsTest extends CommonConditions{
                                     .setupCity(city)
                                     .closePopUp()
                                     .goToCategory(type, name)
-                                    .createItemList();
-        addedItems.addFirst(categoryPage.addToWishList(1));
+                                    .createItemList()
+                                    .addToWishList(1, addedItems);
         assertThat(categoryPage.getNumLikedSpan(), is(equalTo(addedItems.size())));
 
         ItemPage itemPage = categoryPage.goToItem(2)
-                                        .creatItem();
-        addedItems.addFirst(itemPage.addToWishList());
+                                        .creatItem()
+                                        .addToWishList(addedItems);
         assertThat(itemPage.getNumLikedSpan(), is(equalTo(addedItems.size())));
 
         WishListPage wishListPage = itemPage
